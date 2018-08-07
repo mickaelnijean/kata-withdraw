@@ -2,13 +2,20 @@ package com.kata.withdrawmicroservice.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Account {
 	private Long id;
+	@OneToOne(fetch = FetchType.LAZY,
+            optional=false)
+	@JoinColumn(name = "client_id", nullable = false)
 	private Client client;
 	private BigDecimal amount;
 
@@ -41,6 +48,16 @@ public class Account {
 		return this.client.getId();
 	}
 	
+	
+	
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
 	@Override
 	public String toString() {
 		return " You have " + amount

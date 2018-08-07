@@ -1,4 +1,4 @@
-package com.kata.withdrawmicroservice;
+package com.kata.withdrawmicroservice.service;
 
 import java.util.Optional;
 
