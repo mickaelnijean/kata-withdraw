@@ -1,63 +1,49 @@
 package com.kata.withdrawmicroservice.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Account {
-	private int id;
-	private String prenom;
-	private String nom;
-	private float amount;
+	private Long id;
+	private Client client;
+	private BigDecimal amount;
 
 	public Account() {
 	}
 
-	public Account(int id, String prenom, String nom, float amount) {
+	public Account(Long id, Client client, BigDecimal amount) {
 		super();
 		this.id = id;
-		this.prenom = prenom;
-		this.nom = nom;
+		this.client = client;
 		this.amount = amount;
 	}
 	@Id
     @GeneratedValue
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public BigDecimal withdrawMoney(BigDecimal amount){
+		if(amount==null){
+			throw new IllegalArgumentException("you can't withdraw null amount");
+		}
+		if(amount.compareTo(BigDecimal.ZERO)<0){
+			throw new IllegalArgumentException("you can't withdraw negative amount");
+		}
+		return this.amount.subtract(amount);
 	}
-
-	public String getPrenom() {
-		return prenom;
+	
+	public Long getClientId(){
+		return this.client.getId();
 	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public float getAmount() {
-		return amount;
-	}
-
-	public void setAmount(float amount) {
-		this.amount = amount;
-	}
-
+	
 	@Override
 	public String toString() {
-		return "Hello " + prenom + " " + nom + " you have " + amount
+		return " You have " + amount
 				+ "€ on your account!!";
 	}
 }

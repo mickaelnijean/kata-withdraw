@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.kata.withdrawmicroservice.model.Account;
+import com.kata.withdrawmicroservice.model.Client;
 
 @Repository
-public interface AccountDao extends JpaRepository<Account, Integer>{
-	List<Account> findByPrenom(String prenom);
+public interface ClientDao extends JpaRepository<Client, Long>{
+	List<Client> findByFirstName(String firstName);
 }

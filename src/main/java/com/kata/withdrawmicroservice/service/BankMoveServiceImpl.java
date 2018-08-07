@@ -16,6 +16,7 @@ public class BankMoveServiceImpl implements BankMoveService{
 
 	public float updateAmountInAccount(int id, int amount) {
 		Optional<Account> accountO = dao.findById(id);
+		dao.findByPrenom("Pierre");
 		if(!accountO.isPresent()){
 			return -1;
 		}
